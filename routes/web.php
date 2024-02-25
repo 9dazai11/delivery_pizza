@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PizzaController;
+use App\Http\Controllers\PizzaOrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('{any?}', function () {
-    return view('app');
-})->where('any', '.*');
+// Route::get('{any?}', function () {
+//     return view('app');
+// })->where('any', '.*');
+
+Route::get('/pizzas', [PizzaController::class, 'index'])->name('pizza.index');
+Route::get('/pizzas/create', [PizzaController::class, 'create']);
+Route::get('/pizzas/update', [PizzaController::class, 'update']);
+Route::get('/pizzas/delete', [PizzaController::class, 'delete']);
+
+Route::get('/pizza-orders', [PizzaOrderController::class, 'index'])->name('pizzaOrder.index');
+Route::get('/orders', [OrderController::class, 'index'])->name('order.index');
