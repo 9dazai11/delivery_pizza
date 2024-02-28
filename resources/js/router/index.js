@@ -6,17 +6,22 @@ import Order from '../components/Order.vue';
 const routes = [
     {
         path: '/',
-        name: Pizza,
+        name: 'home',
+        component: Pizza
+    },
+    {
+        path: '/pizzas',
+        name: 'pizzas',
         component: Pizza
     },
     {
         path: '/cart',
-        name: Cart,
+        name: 'cart',
         component: Cart
     },
     {
-        path: '/order',
-        name: Order,
+        path: '/orders',
+        name: 'order',
         component: Order
     },
 ];

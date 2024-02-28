@@ -12,7 +12,12 @@ class Pizza extends Model
     use SoftDeletes;
     
     protected $table = 'pizzas';
-    protected $guarded = [];
+    protected $fillable = [
+        'name',
+        'address',
+        'phone',
+        'comment',
+    ];
 
     public function orders() {
         return $this->belongsToMany(Order::class, 'pizza_orders', 'pizza_id', 'order_id');

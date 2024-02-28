@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
+    protected $guarded = [];
 
     public function pizzas() {
         return $this->belongsToMany(Pizza::class, 'pizza_orders', 'order_id', 'pizza_id');
