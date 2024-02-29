@@ -10,10 +10,10 @@ class OrderController extends Controller
 {
     public function store(Request $request) {
         $request->validate([
-            'name' => 'required|string',
-            'address' => 'required|string',
-            'phone' => 'required|string',
-            'comment' => 'nullable|string',
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'comment' => 'nullable|string|max:500',
         ]);
         
         $order = Order::create($request->all());

@@ -14,9 +14,6 @@ import { RouterView } from 'vue-router';
             <li class="nav-item">
               <RouterLink to="/pizzas" class="nav-link active" aria-current="page">Пиццы</RouterLink>
             </li>
-            <li class="nav-item">
-              <RouterLink to="/orders" class="nav-link active" aria-current="page">Заказ</RouterLink>
-            </li>
           </ul>
           <form class="d-flex">
             <RouterLink to="/cart" class="btn btn-outline-success" aria-current="page">Корзина</RouterLink>

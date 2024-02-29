@@ -7,10 +7,19 @@
                     <div class="card-body d-flex flex-column">
                         <h2>{{ pizza.name }}</h2>
                         <p>{{ pizza.description }}</p>
-                        <p>{{ pizza.price }} руб.</p>
-                        <div class="mt-auto">
+                        <!-- <div class="mt-auto">
+                            <p>{{ pizza.price }} руб.</p>
                             <input v-model="pizzaQuantity[pizza.id]" type="number" min="1" placeholder="Количество">
-                            <button @click="addToCart(pizza.id, pizzaQuantity[pizza.id], pizza.price)">В корзину</button>
+                            <button @click="addToCart(pizza.id, pizzaQuantity[pizza.id], pizza.price)" class="btn btn-primary">Добавить в корзину</button>
+                        </div> -->
+                        <div class="mt-auto">
+                            <div>
+                                <span> {{ pizza.price }} </span>
+                                <input v-model="pizzaQuantity[pizza.id]" type="number" class="form-control" style="width: 100px;" min="1"
+                                    placeholder="Количество">
+                                <button @click="addToCart(pizza.id, pizzaQuantity[pizza.id], pizza.price)"
+                                    class="btn btn-primary">Добавить в корзину</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -50,20 +59,14 @@ export default {
                 quantity: quantity,
                 total: price
             })
-            .then(response => {
-                console.log(`Добавлено в корзину: Пицца ID ${pizzaId}, Количество: ${quantity}, Общая стоимость: ${totalPrice} руб.`);
-                this.pizzaQuantity[pizzaId] = 1;
-            })
-            .catch(error => {
-                console.error('Ошибка при добавлении в корзину:', error);
-            });
+                .then(response => {
+                    console.log(`Добавлено в корзину: Пицца ID ${pizzaId}, Количество: ${quantity}, Общая стоимость: ${totalPrice} руб.`);
+                    this.pizzaQuantity[pizzaId] = 1;
+                })
+                .catch(error => {
+                    console.error('Ошибка при добавлении в корзину:', error);
+                });
         },
     }
 }
 </script>
-  
-<style scoped>
-.container {
-    margin-top: 20px;
-}
-</style>
