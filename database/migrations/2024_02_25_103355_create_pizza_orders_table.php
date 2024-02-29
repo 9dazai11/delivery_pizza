@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('pizza_id');
             $table->unsignedBigInteger('order_id')->nullable();
             $table->integer('quantity');
-            $table->decimal('t_price', 8, 2);
+            $table->decimal('total_price', 8, 2);
             $table->timestamps();
 
             $table->index('pizza_id', 'pizza_order_pizza_idx');

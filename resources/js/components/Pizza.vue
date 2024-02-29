@@ -7,13 +7,10 @@
                     <div class="card-body d-flex flex-column">
                         <h2>{{ pizza.name }}</h2>
                         <p>{{ pizza.description }}</p>
+                        <p>{{ pizza.price }} руб.</p>
                         <div class="mt-auto">
-                            <p>{{ pizza.price }} руб.</p>
-                            <form @submit.prevent="addToCart(pizza.id)" class="d-flex align-items-center">
-                                <input type="number" class="form-group col-4" id="quantity" v-model="pizza.quantity" min="1" placeholder="кол-во">
-                                &nbsp;
-                                <button type="submit" class="btn btn-primary">Add to Cart</button>
-                            </form>
+                            <input v-model="pizzaQuantity[pizza.id]" type="number" min="1" placeholder="Количество">
+                            <button @click="addToCart(pizza.id, pizzaQuantity[pizza.id], pizza.price)">В корзину</button>
                         </div>
                     </div>
                 </div>
@@ -27,21 +24,39 @@ export default {
     data() {
         return {
             pizzas: [],
+            pizzaQuantity: {}
         };
     },
     mounted() {
         axios.get('/api/pizzas')
             .then(response => {
                 this.pizzas = response.data;
+
+                this.pizzaQuantity = {};
+                this.pizzas.forEach(pizza => {
+                    this.pizzaQuantity = Object.assign({}, this.pizzaQuantity, { [pizza.id]: 1 });
+                });
             })
             .catch(error => {
-                console.error('Error fetching pizzas:', error);
+                console.error('Ошибка при получении пиццы:', error);
             });
     },
     methods: {
-        addToCart(pizzaId) {
-            
-            console.log('Adding pizza with ID:', pizzaId);
+        addToCart(pizzaId, quantity, price) {
+            const totalPrice = (quantity * price).toFixed(2);
+
+            axios.post('/api/cart', {
+                pizza_id: pizzaId,
+                quantity: quantity,
+                total: price
+            })
+            .then(response => {
+                console.log(`Добавлено в корзину: Пицца ID ${pizzaId}, Количество: ${quantity}, Общая стоимость: ${totalPrice} руб.`);
+                this.pizzaQuantity[pizzaId] = 1;
+            })
+            .catch(error => {
+                console.error('Ошибка при добавлении в корзину:', error);
+            });
         },
     }
 }

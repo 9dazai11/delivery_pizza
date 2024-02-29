@@ -18,7 +18,7 @@
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-  </template>
+</template>
   
   <script>
   export default {
@@ -38,6 +38,7 @@
           .then(response => {
             console.log(response.data.message);
             // Очистите форму или перенаправьте пользователя
+            this.$router.push('/');
           })
           .catch(error => {
             console.error('Error submitting order:', error);

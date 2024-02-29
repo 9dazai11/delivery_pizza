@@ -18,7 +18,7 @@ import { RouterView } from 'vue-router';
               <RouterLink to="/orders" class="nav-link active" aria-current="page">Заказ</RouterLink>
             </li>
           </ul>
-          <form class="d-flex" role="search">
+          <form class="d-flex">
             <RouterLink to="/cart" class="btn btn-outline-success" aria-current="page">Корзина</RouterLink>
           </form>
         </div>

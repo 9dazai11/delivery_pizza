@@ -3,20 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\PizzaOrder;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
     public function store(Request $request) {
         $request->validate([
-            'name' => 'required|string|max:255',
-            // 'address' => 'required|srting|max:255',
-            // 'phone' => 'required|srting|max:255',
-            'comment' => 'nullable|string|max:500',
+            'name' => 'required|string',
+            'address' => 'required|string',
+            'phone' => 'required|string',
+            'comment' => 'nullable|string',
         ]);
         
-        Order::create($request->all());
+        $order = Order::create($request->all());
 
-        return response()->json(['message' => 'Order created successfully']);
+        PizzaOrder::where('order_id', null)->update(['order_id' => $order->id]);
+
+        return response()->json(['message' => 'Заказ успешно оформлен']);
     }
 }

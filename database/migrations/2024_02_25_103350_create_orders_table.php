@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('address');
             $table->string('phone');
             $table->text('comment')->nullable();
-            $table->decimal('total', 8, 2);
             $table->timestamps();
         });
     }
